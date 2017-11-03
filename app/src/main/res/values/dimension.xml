@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="inputSize">24sp</dimen>
-    <dimen name="margin">8dp</dimen>
+    <dimen name="stringSize">24sp</dimen>
+    <dimen name="marginInputString">8dp</dimen>
+    <dimen name="minItemHeight">65dp</dimen>
+    <dimen name="marginItem">5dp</dimen>
 </resources>

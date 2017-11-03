@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="@dimen/minItemHeight"
+    android:layout_margin="@dimen/marginItem">
+
+    <TextView
+        style="@style/ItemText"
+        android:id="@+id/item_name"
+        tools:text="Молоко"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:background="@color/nameColorBg"
+        android:minHeight="@dimen/minItemHeight"/>
+
+    <TextView
+        style="@style/ItemText"
+        android:id="@+id/item_price"
+        tools:text="35"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:background="@color/priceColorBg"
+        android:minHeight="@dimen/minItemHeight"/>
+
+</LinearLayout>
