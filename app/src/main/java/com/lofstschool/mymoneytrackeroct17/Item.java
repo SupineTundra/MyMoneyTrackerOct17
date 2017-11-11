@@ -3,29 +3,19 @@ package com.lofstschool.mymoneytrackeroct17;
 
 public class Item {
 
-    private String name;
-    private int price;
+    public final static String TYPE_UNKNOWN = "unknown";
+    public static final String TYPE_EXPENSE = "expense";
+    public static final String TYPE_INCOME = "income";
+
+    public int id;
+    public int price;
+    public String name;
+    public String type;
 
     public Item(String name, int price) {
         this.name = name;
         this.price = price;
+        this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
 }

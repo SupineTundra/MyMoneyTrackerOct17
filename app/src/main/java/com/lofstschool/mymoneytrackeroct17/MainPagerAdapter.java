@@ -12,7 +12,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     private final static int PAGE_EXPENSES = 0;
     private final static int PAGE_INCOMES = 1;
-    private final static int PAGE_BALANC = 2;
+    private final static int PAGE_BALANCE = 2;
 
 
     private  String[] titles;
@@ -28,10 +28,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case PAGE_EXPENSES:
-                return ItemsFragment.createItemsFragment(ItemsFragment.TYPE_EXPENSE);
+                return ItemsFragment.createItemsFragment(Item.TYPE_EXPENSE);
             case PAGE_INCOMES:
-                return ItemsFragment.createItemsFragment(ItemsFragment.TYPE_INCOME);
-            case PAGE_BALANC:
+                return ItemsFragment.createItemsFragment(Item.TYPE_INCOME);
+            case PAGE_BALANCE:
                 BalanceFragment fragment = new BalanceFragment();
                 return fragment;
 
