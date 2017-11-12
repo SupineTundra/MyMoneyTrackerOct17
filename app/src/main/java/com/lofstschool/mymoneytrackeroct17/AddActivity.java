@@ -14,7 +14,7 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add);
         final EditText titleEdit = findViewById(R.id.nameObj);
         EditText numEdit = findViewById(R.id.numObj);
         final Button addButton = findViewById(R.id.add);

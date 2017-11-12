@@ -16,4 +16,8 @@
 
     </style>
 
+    <style name="floatingButton">
+        <item name="ButtonColor">@colors/buttonColor</item>
+    </style>
+
 </resources>
