@@ -19,6 +19,7 @@ import com.lofstschool.mymoneytrackeroct17.api.Api;
 import java.io.IOException;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import static com.lofstschool.mymoneytrackeroct17.Item.TYPE_UNKNOWN;
 
 public class ItemsFragment extends android.support.v4.app.Fragment {
@@ -75,7 +76,9 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                Intent intent = new Intent(getActivity(), AddActivity.class);
-                startActivity(intent);
+               intent.putExtra (AddActivity.EXTRA_TYPE, type);
+               startActivityForResult(intent, AddActivity.RC_ADD_ITEM );
+
             }
         });
         loadItems();
@@ -140,6 +143,22 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
     }
 
 
+    private void showError(String error) {
+        Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AddActivity.RC_ADD_ITEM && resultCode == RESULT_OK) {
+            Item item = (Item) data.getSerializableExtra(AddActivity.RESULT_ITEM);
+            String str = Integer.toString(item.price);
+            Toast toast = Toast.makeText(getContext(),item.name+" "+str, Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+
    /* private void  loadItems(){
         new LoadItemsTask(new Handler(Looper.getMainLooper()){
             @Override
@@ -185,8 +204,5 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         }
     }*/
 
-    private void showError(String error) {
-        Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-    }
 
 }

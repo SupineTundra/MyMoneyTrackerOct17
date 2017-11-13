@@ -17,7 +17,6 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
-        style="@style/floatingButton"
         android:layout_width="@dimen/floatButton"
         android:layout_height="@dimen/floatButton"
         android:layout_gravity="bottom|end"
