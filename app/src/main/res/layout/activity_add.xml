@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pattern"
+    tools:context="com.lofstschool.mymoneytrackeroct17.MainActivity">
+
+    <LinearLayout
+        android:layout_gravity="start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/nameObj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginInputString"
+            android:layout_weight="2"
+            android:gravity="start"
+            android:hint="@string/objHintName"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/stringSize" />
+
+        <EditText
+            android:id="@+id/numObj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginInputString"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:hint="@string/objHintPrice"
+            android:inputType="number"
+            android:maxLines="1"
+            android:textSize="@dimen/stringSize" />
+
+        <Button
+            android:id="@+id/add"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_add_gray_24dp"
+            android:enabled="false" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="70sp"
+        android:layout_height="@dimen/marginInputString">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/marginInputString"
+        android:background="@drawable/gradient"/>
+
+</FrameLayout>
