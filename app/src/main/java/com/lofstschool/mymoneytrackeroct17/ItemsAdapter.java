@@ -1,15 +1,12 @@
 package com.lofstschool.mymoneytrackeroct17;
 
-import android.support.v7.view.menu.MenuView;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +14,16 @@ import java.util.List;
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
     private List<Item> items = new ArrayList<>();
+    private ItemsAdapterListener listener = null;
 
     public void setItems (List<Item> items){
         this.items = items;
         notifyDataSetChanged();
-        }
+    }
 
+    public void  setListenet (ItemsAdapterListener listener) {
+      this.listener = listener;
+    }
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +40,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
     @Override
     public int getItemCount() {
-
         return items.size();
     }
 
@@ -49,22 +49,26 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name;
-        private    TextView price;
+        private TextView price;
+        private Resources resources;
 
-        ItemViewHolder(View ItemView) {
-
-
+        ItemViewHolder(View ItemView, ItemsAdapterListener listener) {
             super(ItemView);
+            resources = itemView.getResources();
             name = itemView.findViewById(R.id.item_name);
             price = itemView.findViewById(R.id.item_price);
         }
         void bind (Item item){
+            String ruble = resources.getString(R.string.price, item.price);
             name.setText(item.name);
-            SpannableStringBuilder sB = new SpannableStringBuilder();
-            sB.append(String.valueOf(item.price));
-            sB.append(" ");
-            sB.append(Html.fromHtml("&#8381;"));
-            price.setText(sB);
+            price.setText(ruble);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
     }
 
