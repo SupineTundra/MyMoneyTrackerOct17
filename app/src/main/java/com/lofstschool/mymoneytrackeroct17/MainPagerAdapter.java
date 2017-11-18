@@ -2,7 +2,6 @@ package com.lofstschool.mymoneytrackeroct17;
 
 
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,8 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class MainPagerAdapter extends FragmentPagerAdapter {
 
 
-    private final static int PAGE_EXPENSES = 0;
-    private final static int PAGE_INCOMES = 1;
+    private final static int PAGE_EXPENSES = 1;
+    private final static int PAGE_INCOMES = 0;
     private final static int PAGE_BALANCE = 2;
 
 

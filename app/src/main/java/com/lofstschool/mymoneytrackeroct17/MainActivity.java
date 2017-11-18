@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager pager = findViewById(R.id.pages);
         TabLayout tabs = findViewById(R.id.tabs);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
 
         pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), getResources()));
         tabs.setupWithViewPager(pager);

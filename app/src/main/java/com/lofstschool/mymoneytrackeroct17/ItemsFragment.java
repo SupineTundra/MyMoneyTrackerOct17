@@ -1,34 +1,26 @@
 package com.lofstschool.mymoneytrackeroct17;
 
-import android.app.Fragment;
-import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import com.lofstschool.mymoneytrackeroct17.Result.AddResult;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import 	android.widget.Toast;
-
-import static com.lofstschool.mymoneytrackeroct17.Item.TYPE_EXPENSE;
-import static com.lofstschool.mymoneytrackeroct17.Item.TYPE_INCOME;
-import static com.lofstschool.mymoneytrackeroct17.Item.TYPE_UNKNOWN;
-
+import android.widget.Toast;
 
 import com.lofstschool.mymoneytrackeroct17.api.Api;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
+import static com.lofstschool.mymoneytrackeroct17.Item.TYPE_UNKNOWN;
 
 public class ItemsFragment extends android.support.v4.app.Fragment {
 
@@ -79,7 +71,16 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         RecyclerView recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler.setAdapter(adapter);
+        FloatingActionButton fab = view.findViewById(R.id.fab_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(getActivity(), AddActivity.class);
+               intent.putExtra (AddActivity.EXTRA_TYPE, type);
+               startActivityForResult(intent, AddActivity.RC_ADD_ITEM );
 
+            }
+        });
         loadItems();
     }
 
@@ -142,6 +143,22 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
     }
 
 
+    private void showError(String error) {
+        Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AddActivity.RC_ADD_ITEM && resultCode == RESULT_OK) {
+            Item item = (Item) data.getSerializableExtra(AddActivity.RESULT_ITEM);
+            String str = Integer.toString(item.price);
+            Toast toast = Toast.makeText(getContext(),item.name+" "+str, Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+
    /* private void  loadItems(){
         new LoadItemsTask(new Handler(Looper.getMainLooper()){
             @Override
@@ -187,8 +204,5 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         }
     }*/
 
-    private void showError(String error) {
-        Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-    }
 
 }

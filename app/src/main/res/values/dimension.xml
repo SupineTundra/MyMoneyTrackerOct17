@@ -4,4 +4,8 @@
     <dimen name="marginInputString">8dp</dimen>
     <dimen name="minItemHeight">65dp</dimen>
     <dimen name="marginItem">5dp</dimen>
+    <dimen name="floatButton">56dp</dimen>
+    <dimen name="elevateShadow2">4dp</dimen>
+    <dimen name="elevateShadow1">8dp</dimen>
+    <dimen name="padding">16dp</dimen>
 </resources>

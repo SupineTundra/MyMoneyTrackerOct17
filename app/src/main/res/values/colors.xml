@@ -8,6 +8,7 @@
     <color name="gray">#95989a</color>
     <color name="nameColorBg">#fcc418</color>
     <color name="priceColorBg">#e6af1e</color>
+    <color name="buttonColor">#15a699</color>
 
 
 </resources>
