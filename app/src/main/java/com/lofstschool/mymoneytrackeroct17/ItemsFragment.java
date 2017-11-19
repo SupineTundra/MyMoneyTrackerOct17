@@ -87,7 +87,6 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
     private void  loadItems(){
         getLoaderManager().initLoader(LOADER_ITEMS, null, new LoaderManager.LoaderCallbacks<List<Item>>()
         {
-
             @Override
             public Loader<List<Item>> onCreateLoader(int id, Bundle args) {
                 return new AsyncTaskLoader<List<Item>>(getContext()) {
@@ -122,23 +121,14 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
 
     private void  addItems() {
         getLoaderManager().restartLoader(LOADER_ADD, null, new LoaderManager.LoaderCallbacks<Result.AddResult>()
-
                  {
-
                     @Override
                     public Loader<Result.AddResult> onCreateLoader(int id, Bundle args) {
-                        return null;
-                    }
-
+                        return null;}
                     @Override
-                    public void onLoadFinished(Loader<Result.AddResult> loader, Result.AddResult items) {
-
-                    }
-
+                    public void onLoadFinished(Loader<Result.AddResult> loader, Result.AddResult items) {}
                     @Override
-                    public void onLoaderReset(Loader<Result.AddResult> loader) {
-
-                    }
+                    public void onLoaderReset(Loader<Result.AddResult> loader) {}
                 }).forceLoad();
     }
 

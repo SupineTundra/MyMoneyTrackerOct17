@@ -5,18 +5,17 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/minItemHeight"
     android:layout_margin="@dimen/marginItem">
 
     <TextView
-        style="@style/ItemText"
         android:id="@+id/item_name"
-        tools:text="Молоко"
+        style="@style/ItemText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/minItemHeight"
         android:layout_weight="3"
-        android:background="@color/nameColorBg" />
+        android:background="@color/nameColorBg"
+        android:minHeight="@dimen/minItemHeight"
+        tools:text="Молоко" />
 
     <TextView
         style="@style/ItemText"
