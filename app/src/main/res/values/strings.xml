@@ -9,6 +9,8 @@
     <string name="tab_balance">БАЛАНС</string>
     <string name="addName">Новая запись</string>
     <string name="mainName">Учёт бюджета</string>
+    <string name="delete">Удалить</string>
+    <string name="selected">Выделено %1$d</string>
 
 
     <string-array name="tabs_titles">

@@ -5,15 +5,17 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/item_bg"
     android:layout_margin="@dimen/marginItem">
 
     <TextView
         android:id="@+id/item_name"
         style="@style/ItemText"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="3"
-        android:background="@color/nameColorBg"
         android:minHeight="@dimen/minItemHeight"
         tools:text="Молоко" />
 
@@ -21,10 +23,12 @@
         style="@style/ItemText"
         android:id="@+id/item_price"
         tools:text="35"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="7"
         android:minHeight="@dimen/minItemHeight"
-        android:background="@color/priceColorBg" />
+        android:background="@color/item_color_shadow" />
 
 </LinearLayout>
