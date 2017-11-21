@@ -46,7 +46,7 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
 
     public android.support.v7.view.ActionMode actionMode;
     private SwipeRefreshLayout refresh;
-    private List<Integer> itemsToDelete = new ArrayList<>();
+    private List<Integer> DeletingItemList = new ArrayList<>();
 
     public static ItemsFragment createItemsFragment(String type) {
         ItemsFragment fragment = new ItemsFragment();
@@ -161,6 +161,7 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
                 } else {
                     adapter.setItems(items);
                 }
+                refresh.setRefreshing(true);
                 refresh.setRefreshing(false);
             }
 
@@ -209,6 +210,8 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
                     @Override
                     public void onLoadFinished(Loader<AddResult> loader, AddResult data) {
                         adapter.updateId(item, AddResult.id);
+                        refresh.setRefreshing(true);
+                        refresh.setRefreshing(false);
                     }
 
                     @Override
@@ -219,7 +222,7 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
     }
 
     private void deleteItem(final Item item) {
-        itemsToDelete.add(item.id);
+        DeletingItemList.add(item.id);
         getLoaderManager().initLoader(LOADER_REMOVE, null, new LoaderManager.LoaderCallbacks() {
             @SuppressLint("StaticFieldLeak")
             @Override
@@ -228,7 +231,7 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
                     @Override
                     public Boolean loadInBackground() {
                         try {
-                            for (Integer id : itemsToDelete)
+                            for (Integer id : DeletingItemList)
                                 api.remove((int) id).execute().body();
                         } catch (IOException e1) {
                             e1.printStackTrace();
@@ -316,5 +319,14 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         ConfirmationDialog confirmationDialog =new ConfirmationDialog();
         confirmationDialog.setListener(dialogInterface);
         confirmationDialog.show(getFragmentManager(), "Confirmation");
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            loadItems();
+        }
+
     }
 }
