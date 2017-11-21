@@ -1,10 +1,10 @@
 <resources>
 
-
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorText</item>
     </style>
 
     <style name="AppTheme.Toolbar" parent="Theme.AppCompat.NoActionBar">
@@ -16,10 +16,6 @@
         <item name="windowActionModeOverlay">true</item>
     </style>
 
-
-
-
-
     <style name="ItemText">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:padding">@dimen/marginItem</item>
@@ -27,6 +23,5 @@
         <item name="android:textSize">@dimen/stringSize</item>
 
     </style>
-
 
 </resources>

@@ -12,6 +12,10 @@
     <string name="delete">Удалить</string>
     <string name="selected">Выделено %1$d</string>
 
+    <string name="balance_total">Ваш баланс</string>
+    <string name="balance_expense">Расход</string>
+    <string name="balance_income">Доход</string>
+
 
     <string-array name="tabs_titles">
         <item>@string/tab_expenses</item>

@@ -20,8 +20,8 @@ public interface Api {
     @GET ("items")
     Call<List<Item>> items (@Query("type") String type);
 
-    /*@GET("balance")
-    Call<BalanceResult> balance();*/
+    @GET("balance")
+    Call<BalanceResult> balance();
 
     @POST("items/add")
     Call<AddResult> add(@Query("name") String name, @Query("price") int price, @Query("type") String type);
