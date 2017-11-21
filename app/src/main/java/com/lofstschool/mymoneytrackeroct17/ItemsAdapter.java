@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lofstschool.mymoneytrackeroct17.api.AddResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +56,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         notifyItemChanged(pos);
     }
 
+    public Item getItemByPosition(int pos) {
+        return items.get(pos);
+    }
+
+    public void updateId(Item item, int id) {
+        item.id = AddResult.id;
+        items.add(item);
+    }
+
     void clearSelections() {
         selectedItems.clear();
         notifyDataSetChanged();
@@ -76,8 +87,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         notifyItemRemoved(pos);
         return item;
     }
-
-
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -22,9 +21,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.lofstschool.mymoneytrackeroct17.api.AddResult;
 import com.lofstschool.mymoneytrackeroct17.api.Api;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -34,16 +35,18 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
 
     private static final int LOADER_ITEMS = 0;
     private static final int LOADER_ADD = 1;
+    private static final int LOADER_REMOVE = 2;
     private String type = TYPE_UNKNOWN;
 
     private static final String KEY_TYPE = "TYPE";
 
-    private ConfirmationDialog confirmationDialog;
+
     private ItemsAdapter adapter;
     private Api api;
 
-    private android.support.v7.view.ActionMode actionMode;
+    public android.support.v7.view.ActionMode actionMode;
     private SwipeRefreshLayout refresh;
+    private List<Integer> itemsToDelete = new ArrayList<>();
 
     public static ItemsFragment createItemsFragment(String type) {
         ItemsFragment fragment = new ItemsFragment();
@@ -120,8 +123,8 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
             }
         });
         loadItems();
-        refresh = (SwipeRefreshLayout) view.findViewById(R. id.refresh);
-        refresh.setOnRefreshListener(new SwipeRefreshLayout. OnRefreshListener() {
+        refresh = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override   public void onRefresh() {
                 loadItems();
             }
@@ -140,11 +143,13 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
                     public List<Item> loadInBackground() {
                         try {
                             List<Item> items = api.items(type).execute().body();
-                            return items;
+                                return items;
+
                         } catch (IOException e) {
                             e.printStackTrace();
                             return null;
                         }
+
                     }
                 };
             }
@@ -166,24 +171,6 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         }).forceLoad();
     }
 
-    private void addItems() {
-        getLoaderManager().restartLoader(LOADER_ADD, null, new LoaderManager.LoaderCallbacks<Result.AddResult>() {
-            @Override
-            public Loader<Result.AddResult> onCreateLoader(int id, Bundle args) {
-                return null;
-            }
-
-            @Override
-            public void onLoadFinished(Loader<Result.AddResult> loader, Result.AddResult items) {
-            }
-
-            @Override
-            public void onLoaderReset(Loader<Result.AddResult> loader) {
-            }
-        }).forceLoad();
-    }
-
-
     private void showError(String error) {
         Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
     }
@@ -193,13 +180,79 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == AddActivity.RC_ADD_ITEM && resultCode == RESULT_OK) {
             Item item = (Item) data.getSerializableExtra(AddActivity.RESULT_ITEM);
-            String str = Integer.toString(item.price);
-            Toast toast = Toast.makeText(getContext(), item.name + " " + str, Toast.LENGTH_LONG);
-            toast.show();
+            addItem(item);
+            //String str = Integer.toString(item.price);
+            //Toast toast = Toast.makeText(getContext(), item.name + " " + str, Toast.LENGTH_LONG);
+            //toast.show();
         }
     }
 
+    private void addItem(final Item item) {
+        getLoaderManager().restartLoader(LOADER_ADD, null, new
+                LoaderManager.LoaderCallbacks<AddResult>() {
+                    @SuppressLint("StaticFieldLeak")
+                    @Override
+                    public Loader<AddResult> onCreateLoader(int id, Bundle args) {
+                        return new AsyncTaskLoader<AddResult>(getContext()) {
+                            @Override
+                            public AddResult loadInBackground() {
+                                try {
+                                    return api.add(item.name, item.price, item.type).execute().body();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    return null;
+                                }
+                            }
+                        };
+                    }
+
+                    @Override
+                    public void onLoadFinished(Loader<AddResult> loader, AddResult data) {
+                        adapter.updateId(item, AddResult.id);
+                    }
+
+                    @Override
+                    public void onLoaderReset(Loader<AddResult> loader) {
+
+                    }
+                }).forceLoad();
+    }
+
+    private void deleteItem(final Item item) {
+        itemsToDelete.add(item.id);
+        getLoaderManager().initLoader(LOADER_REMOVE, null, new LoaderManager.LoaderCallbacks() {
+            @SuppressLint("StaticFieldLeak")
+            @Override
+            public Loader onCreateLoader(int id, Bundle args) {
+                return new AsyncTaskLoader<Boolean>(getContext()) {
+                    @Override
+                    public Boolean loadInBackground() {
+                        try {
+                            for (Integer id : itemsToDelete)
+                                api.remove((int) id).execute().body();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        return null;
+                    }
+                };
+            }
+
+            @Override
+            public void onLoadFinished(Loader loader, Object data) {
+            }
+
+            @Override
+            public void onLoaderReset(Loader loader) {}
+
+        }).forceLoad();
+    }
+
     private void removeSelectedItems() {
+        for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--) {
+            deleteItem(adapter.getItemByPosition(adapter.getSelectedItems().get(i)));
+        }
+
         for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--) {
             adapter.remove(adapter.getSelectedItems().get(i));
         }
@@ -224,21 +277,7 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_remove:
-                    /*showDialog();
-                    confirmationDialog.setListener(new DialogInterface() {
-                      @Override
-                      public void onConfirm(ConfirmationDialog confirmationDialog) {
-
-                        }
-
-                        @Override
-                        public void onDismiss(ConfirmationDialog confirmationDialog) {
-
-                        }
-                    });*/
-                    removeSelectedItems();
-                    actionMode.finish();
-                    actionMode = null;
+                    showDialog();
                     return true;
 
                 default:
@@ -249,13 +288,33 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             adapter.clearSelections();
-            actionMode = null;
+            setNullAction();
+            refresh.setRefreshing(false);
         }
 
     };
 
-    private void showDialog() {
-        DialogFragment dialog = new ConfirmationDialog();
-        dialog.show(getFragmentManager(), "Confirmation");
+    private void setNullAction() {
+        actionMode = null;
+    }
+
+    private void  showDialog() {
+        DialogInterface dialogInterface = new DialogInterface() {
+            @Override
+            public void onPositiveClick() {
+                removeSelectedItems();
+                refresh.setRefreshing(true);
+                actionMode.finish();
+                actionMode = null;
+            }
+
+            @Override
+            public void onNegativeClick() {
+                actionMode.finish();
+            }
+        };
+        ConfirmationDialog confirmationDialog =new ConfirmationDialog();
+        confirmationDialog.setListener(dialogInterface);
+        confirmationDialog.show(getFragmentManager(), "Confirmation");
     }
 }

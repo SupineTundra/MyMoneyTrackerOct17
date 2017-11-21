@@ -26,14 +26,14 @@ public class ConfirmationDialog extends DialogFragment {
                 .setPositiveButton(android.R.string.ok, new android.content.DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(android.content.DialogInterface dialog, int id) {
-                       listener.onConfirm(ConfirmationDialog.this);
+                        listener.onPositiveClick();
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .setOnDismissListener(new android.content.DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(android.content.DialogInterface dialog) {
-                        listener.onDismiss(ConfirmationDialog.this);
+                        listener.onNegativeClick();
                     }
                 });
 

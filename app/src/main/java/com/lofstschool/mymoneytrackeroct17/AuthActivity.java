@@ -71,6 +71,7 @@ public class AuthActivity extends AppCompatActivity {
 
                     @Override
                     public void onLoadFinished(Loader<AuthResult> loader, AuthResult result) {
+
                         if (result != null) {
                             ((App) getApplicationContext()).setAuthToken(result.authToken);
                             finish();

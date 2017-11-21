@@ -21,6 +21,8 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/item" />
 
+    </android.support.v4.widget.SwipeRefreshLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="@dimen/floatButton"
@@ -29,7 +31,5 @@
         android:layout_margin="@dimen/stringSize"
         app:backgroundTint="@color/buttonColor"
         android:src="@drawable/ic_add_white_24dp"
-           />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
+        />
 </FrameLayout>

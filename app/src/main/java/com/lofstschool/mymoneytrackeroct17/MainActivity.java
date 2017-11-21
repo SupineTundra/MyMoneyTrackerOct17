@@ -25,12 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
 
-
-        pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), getResources()));
-        tabs.setupWithViewPager(pager);
-
-       startActivity(new Intent(this, AuthActivity.class));
-
     }
 
     @Override

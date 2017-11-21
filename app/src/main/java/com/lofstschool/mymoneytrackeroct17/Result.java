@@ -11,6 +11,6 @@ public class Result {
         return TextUtils.equals(status, "success");
     }
 
-    public class AddResult extends Result{  public int id; }
+
 
 }

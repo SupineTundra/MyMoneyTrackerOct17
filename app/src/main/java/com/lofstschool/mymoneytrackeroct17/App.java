@@ -27,8 +27,8 @@ import static okhttp3.logging.HttpLoggingInterceptor.Level.NONE;
 
 public class App extends Application {
 
-    private static final String PREFERENCES_SESSION = "token";
-    private static final String KEY_AUTH_TOKEN = "key";
+    private static final String PREFERENCES_SESSION = "session";
+    private static final String KEY_AUTH_TOKEN = "auth-token";
     private Api api;
 
     @Override
@@ -62,7 +62,7 @@ public class App extends Application {
     }
 
     public void setAuthToken(String token) {
-        getSharedPreferences("session", MODE_PRIVATE).edit().putString("token", token).apply();
+        getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE).edit().putString(KEY_AUTH_TOKEN, token).apply();
     }
 
     public String getAuthToken() {
@@ -70,6 +70,7 @@ public class App extends Application {
     }
 
     public boolean isLoggedIn() {
+
         return !TextUtils.isEmpty(getAuthToken());
     }
 
