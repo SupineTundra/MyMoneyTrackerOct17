@@ -5,8 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lofstschool.mymoneytrackeroct17.ItemsFragment"
-    android:background="@drawable/bg_pattern">
+    tools:context="com.lofstschool.mymoneytrackeroct17.ItemsFragment">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
@@ -14,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
@@ -23,7 +31,5 @@
         android:layout_margin="@dimen/stringSize"
         app:backgroundTint="@color/buttonColor"
         android:src="@drawable/ic_add_white_24dp"
-           />
-
-
+        />
 </FrameLayout>
