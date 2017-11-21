@@ -10,5 +10,18 @@
     <color name="priceColorBg">#e6af1e</color>
     <color name="buttonColor">#15a699</color>
 
+    <color name="tab_indicator_color">#ffff8d</color>
+    <color name="tab_text_color_active">#FFFFFF</color>
+    <color name="tab_text_color_default">#ddede8</color>
+
+    <color name="item_color">#fcc518</color>
+    <color name="item_color_shadow">#10060506</color>
+    <color name="item_color_selected">#995201</color>
+
+
+    <color name="balance_total_color">#3ab7ae</color>
+    <color name="balance_expense_color">#f76c41</color>
+    <color name="balance_income_color">#fcc31e</color>
+    <color name="balance_secondary_text_color">#95989a</color>
 
 </resources>
