@@ -3,11 +3,18 @@
     <string name="objHintName">Название</string>
     <string name="objHintPrice">0 &#8381;</string>
     <string name="ruble">&#8381;</string>
+    <string name="price">%1$d \u20bd</string>
     <string name="tab_expenses">РАСХОДЫ</string>
     <string name="tab_incomes">ДОХОДЫ</string>
     <string name="tab_balance">БАЛАНС</string>
     <string name="addName">Новая запись</string>
     <string name="mainName">Учёт бюджета</string>
+    <string name="delete">Удалить</string>
+    <string name="selected">Выделено %1$d</string>
+
+    <string name="balance_total">Ваш баланс</string>
+    <string name="balance_expense">Расход</string>
+    <string name="balance_income">Доход</string>
 
 
     <string-array name="tabs_titles">
